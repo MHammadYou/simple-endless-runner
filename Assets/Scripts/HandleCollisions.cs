@@ -3,14 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class HandleCollisions : MonoBehaviour
 {
-
-    public Transform player;
-
     private bool _gameHasEnded = false;
     
     void Update()
     {
-        if (player.position.y < -1f)
+        if (transform.position.y < -1f)
         {
             EndGame();
         }
@@ -33,8 +30,10 @@ public class HandleCollisions : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("Hit");
             EndGame();
         }
     }

@@ -33,7 +33,6 @@ public class HandleCollisions : MonoBehaviour
         
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Hit");
             EndGame();
         }
     }

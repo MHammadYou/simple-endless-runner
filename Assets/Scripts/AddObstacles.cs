@@ -33,8 +33,10 @@ public class AddObstacles : MonoBehaviour
 
         if (_previousObstacle)
         {
-            Debug.Log(obstacle.GetInstanceID());
-            Debug.Log(_previousObstacle.GetInstanceID());
+            if (_previousObstacle.tag == obstacle.tag)
+            {
+                return AddObstacle();
+            }
         }    
         
         

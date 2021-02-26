@@ -18,12 +18,6 @@ public class AddObstacles : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private GameObject AddObstacle()
     {
         GameObject newObstacle = GetRandomObstacle();
@@ -31,15 +25,7 @@ public class AddObstacles : MonoBehaviour
 
         GameObject obstacle = Instantiate(newObstacle, new Vector3(newObstaclePos.x, newObstaclePos.y, _height), Quaternion.identity);
 
-        if (_previousObstacle)
-        {
-            if (_previousObstacle.tag == obstacle.tag)
-            {
-                return AddObstacle();
-            }
-        }    
-        
-        
+
         _height += 10;
         _previousObstacle = obstacle;
         return obstacle;
@@ -47,6 +33,17 @@ public class AddObstacles : MonoBehaviour
 
     private GameObject GetRandomObstacle()
     {
-        return obstacles[Random.Range(0, obstacles.Length)];
+        GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
+
+        if (_previousObstacle)
+        {
+            if (_previousObstacle.tag == obstacle.tag)
+            {
+                return GetRandomObstacle();
+            }
+        }
+
+        _previousObstacle = obstacle;
+        return obstacle;
     }
 }

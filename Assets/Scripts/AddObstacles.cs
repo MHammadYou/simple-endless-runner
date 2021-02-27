@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,8 +15,19 @@ public class AddObstacles : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            AddObstacle();
+            GameObject obstacle = AddObstacle();
+            currentObstacles.Enqueue(obstacle);
         }
+    }
+
+    void Update()
+    {
+            
+    }
+
+    private void ManageObstacles()
+    {
+        
     }
 
     private GameObject AddObstacle()

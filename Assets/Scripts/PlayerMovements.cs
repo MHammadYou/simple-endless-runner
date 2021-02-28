@@ -9,7 +9,7 @@ public class PlayerMovements : MonoBehaviour
     void FixedUpdate()
     {
 
-        rb.AddForce(0, 0, 1000 * Time.deltaTime);
+        // rb.AddForce(0, 0, 1000 * Time.deltaTime);
  
         if (Input.GetKey("a"))
         {

@@ -38,7 +38,7 @@ public class AddObstacles : MonoBehaviour
         GameObject obstacle = Instantiate(newObstacle, new Vector3(newObstaclePos.x, newObstaclePos.y, _height), Quaternion.identity);
 
 
-        _height += 10;
+        _height += 15;
         _previousObstacle = obstacle;
         return obstacle;
     }

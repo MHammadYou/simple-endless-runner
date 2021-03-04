@@ -11,6 +11,7 @@ public class AddObstacles : MonoBehaviour
 
     private Queue<GameObject> currentObstacles = new Queue<GameObject>();
     private float _height = 20;
+    private float _groundHeight = 136;
     private GameObject _previousObstacle;
     void Start()
     {
@@ -20,6 +21,17 @@ public class AddObstacles : MonoBehaviour
             currentObstacles.Enqueue(obstacle);
         }
         AddGround();
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject obstacle = AddObstacle();
+            currentObstacles.Enqueue(obstacle);
+        } 
+        AddGround();
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject obstacle = AddObstacle();
+            currentObstacles.Enqueue(obstacle);
+        }
     }
 
     void Update()
@@ -31,11 +43,13 @@ public class AddObstacles : MonoBehaviour
         
     }
 
-    private void AddGround()
+    private GameObject AddGround()
     {
-        GameObject newGround = Instantiate(ground,
-            new Vector3(ground.transform.position.x, ground.transform.position.y, ground.transform.position.z + 100),
-            Quaternion.identity);
+        Vector3 groundPos = ground.transform.position;
+        GameObject newGround = Instantiate(ground, new Vector3(groundPos.x, groundPos.y, _groundHeight), Quaternion.identity);
+
+        _groundHeight += 100;
+        return newGround;
     }
 
     private GameObject AddObstacle()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,8 +7,11 @@ public class AddObstacles : MonoBehaviour
 
     public GameObject[] obstacles;
     public GameObject ground;
+    public GameObject player;
 
     private Queue<GameObject> currentObstacles = new Queue<GameObject>();
+    private Queue<GameObject> currentBase = new Queue<GameObject>();
+    
     private float _height = 20;
     private float _groundHeight = 136;
     private GameObject _previousObstacle;
@@ -17,52 +19,45 @@ public class AddObstacles : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            GameObject obstacle = AddObstacle();
-            currentObstacles.Enqueue(obstacle);
-        }
-        AddGround();
-        for (int i = 0; i < 5; i++)
-        {
-            GameObject obstacle = AddObstacle();
-            currentObstacles.Enqueue(obstacle);
-        } 
-        AddGround();
-        for (int i = 0; i < 5; i++)
-        {
-            GameObject obstacle = AddObstacle();
-            currentObstacles.Enqueue(obstacle);
+            AddObstacle();
+            AddGround();
         }
     }
 
     void Update()
     {
+        ManageObstacles();
     }
 
     private void ManageObstacles()
     {
+        if (player.transform.position.z < _height - 50) 
+        {
+            Debug.Log("Hit");
+        }
         
     }
 
-    private GameObject AddGround()
+    private void AddGround()
     {
         Vector3 groundPos = ground.transform.position;
         GameObject newGround = Instantiate(ground, new Vector3(groundPos.x, groundPos.y, _groundHeight), Quaternion.identity);
 
         _groundHeight += 100;
-        return newGround;
+        currentBase.Enqueue(newGround);
     }
 
-    private GameObject AddObstacle()
+    private void AddObstacle()
     {
         GameObject newObstacle = GetRandomObstacle();
         Vector3 newObstaclePos = newObstacle.transform.position;
 
         GameObject obstacle = Instantiate(newObstacle, new Vector3(newObstaclePos.x, newObstaclePos.y, _height), Quaternion.identity);
 
-
+        currentObstacles.Enqueue(obstacle);
+        
         _height += 15;
         _previousObstacle = obstacle;
-        return obstacle;
     }
 
     private GameObject GetRandomObstacle()

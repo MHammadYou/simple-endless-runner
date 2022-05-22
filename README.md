@@ -1,1 +1,1 @@
-﻿Simple Endless Runner Game
+# Simple Endless Runner Game
